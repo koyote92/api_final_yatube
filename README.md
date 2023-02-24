@@ -68,3 +68,7 @@ POST http://your-domain.com/api/v1/posts/
   "group": 0
 }
 ```
+### Подробная документация по запросам к API доступна по адресу:
+```
+http://your-domain.com/redoc/
+```
