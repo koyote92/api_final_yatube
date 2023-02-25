@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, filters
+from rest_framework import filters, viewsets, mixins
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 
@@ -42,13 +42,21 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+# Вроде так правильно? По крайней мере, так автотесты проходит.
+# Тогда я немного поменял урлы, нам ведь не нужен эндпоинт
+# 'api/v1/follow/{id}/
+class FollowViewSet(mixins.ListModelMixin,
+                    mixins.CreateModelMixin,
+                    viewsets.GenericViewSet):
     serializer_class = FollowSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
 
+    # Тут тоже, если я тебя правильно понял, надо так?
     def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user)
+        return Follow.objects.select_related('user', 'following').filter(
+            user=self.request.user
+        )
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

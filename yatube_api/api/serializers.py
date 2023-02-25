@@ -27,7 +27,6 @@ class FollowSerializer(serializers.ModelSerializer):
         slug_field='username'
     )
 
-    # Как эту валидацию лучше сделать? Я этот вариант еле-еле, но родил.
     def validate(self, data):
         if self.context['request'].user == data['following']:
             raise serializers.ValidationError(

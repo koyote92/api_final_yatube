@@ -72,3 +72,28 @@ POST http://your-domain.com/api/v1/posts/
 ```
 http://your-domain.com/redoc/
 ```
+## Стэк технологий:
+- Django
+- Django REST Framework
+- Simple JSON Web Token
+
+## Авторы
+Приложение posts, основные настройки проекта, документация:
+```
+https://github.com/evi1ghost
+```
+```
+https://github.com/a-ershov
+```
+```
+https://github.com/TurboKach
+```
+```
+https://github.com/yandex-praktikum
+```
+Приложение API:
+```
+https://github.com/koyote92
+```
+Ревьюер проекта:
+- Алексей Григорьев
