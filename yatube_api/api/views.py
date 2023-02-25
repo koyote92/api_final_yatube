@@ -44,7 +44,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 # Вроде так правильно? По крайней мере, так автотесты проходит.
 # Тогда я немного поменял урлы, нам ведь не нужен эндпоинт
-# 'api/v1/follow/{id}/
+# 'api/v1/follow/{id}/'
 class FollowViewSet(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     viewsets.GenericViewSet):
