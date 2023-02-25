@@ -10,7 +10,7 @@ from api.serializers import (
     GroupSerializer,
     PostSerializer,
 )
-from posts.models import Follow, Group, Post
+from posts.models import Follow, Group, Post, User
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -42,9 +42,6 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-# Вроде так правильно? По крайней мере, так автотесты проходит.
-# Тогда я немного поменял урлы, нам ведь не нужен эндпоинт
-# 'api/v1/follow/{id}/'
 class FollowViewSet(mixins.ListModelMixin,
                     mixins.CreateModelMixin,
                     viewsets.GenericViewSet):
@@ -52,11 +49,8 @@ class FollowViewSet(mixins.ListModelMixin,
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
 
-    # Тут тоже, если я тебя правильно понял, надо так?
     def get_queryset(self):
-        return Follow.objects.select_related('user', 'following').filter(
-            user=self.request.user
-        )
+        return self.request.user.follower.select_related('user')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
