@@ -8,7 +8,7 @@
 ## Установка
 1. Необходимо клонировать репозиторий на свой компьютер при помощи команды:
 ```
-git@github.com:koyote92/api_final_yatube.git
+git clone git@github.com:koyote92/api_final_yatube.git
 ```
 2. Перейти в папку с проектом:
 ```
