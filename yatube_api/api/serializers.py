@@ -44,6 +44,7 @@ class FollowSerializer(serializers.ModelSerializer):
             )
         return data
 
+
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
